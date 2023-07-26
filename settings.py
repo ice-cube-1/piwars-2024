@@ -1,6 +1,6 @@
 # xres = 640
 # yres = 480
-xres = 50
-yres = 50
-sensitivity = 10
-turnBy = 0.5
+xres = 32
+yres = 32
+sensitivity = 4
+turnBy = 2

@@ -11,7 +11,7 @@ def update(image):
     clear = cv2.GaussianBlur(gray, (5,5), 0)
     reverse = cv2.bitwise_not(clear)
     ret,boolimg = cv2.threshold(reverse, 120, 255, cv2.THRESH_BINARY_INV)
-    cx,cy,maxcontour,countours = tools.get_centroid_and_max_contour(boolimg, 1, cv2.CHAIN_APPROX_NONE)
+    cx,cy,maxcontour,contours = tools.get_centroid_and_max_contour(boolimg, 1, cv2.CHAIN_APPROX_NONE)
     print(cx,cy)
     if False not in (cx, cy):
         halfx=settings.xres//2

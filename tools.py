@@ -5,7 +5,6 @@ import cv2
 def get_centroid_and_max_contour(boolean_image, *args):
 
     contours, hierarchy = cv2.findContours(boolean_image.copy(), *args)
-    print(contours)
     if contours:
         # If there are countours (i.e. a line) then find the largest one (the most likely to be your line)
         # Also draws lines on the image so it can be seen by humans (not NEEDED, but good for debugging purposes)
