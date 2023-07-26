@@ -1,18 +1,19 @@
-# should probably credit this to robot apocalypse
-
+# should probably credit this to robot apocalypse committee
+import math
 import cv2
 
 def get_centroid_and_max_contour(boolean_image, *args):
 
     contours, hierarchy = cv2.findContours(boolean_image.copy(), *args)
-
+    print(contours)
     if contours:
         # If there are countours (i.e. a line) then find the largest one (the most likely to be your line)
         # Also draws lines on the image so it can be seen by humans (not NEEDED, but good for debugging purposes)
 
         max_contour = max(contours, key=cv2.contourArea)
         moment = cv2.moments(max_contour)
-
+        if moment['m00'] == 0:
+            return (False, False, False, False)
         center_x = int(moment['m10']/moment['m00'])
         center_y = int(moment['m01']/moment['m00'])
 
@@ -34,3 +35,12 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
 
     # Convert the 0-1 range into a value in the right range.
     return rightMin + (valueScaled * rightSpan)
+
+# this actually isn't stolen :D
+
+def rotateCoords(origin, point, angle):
+    ox,oy = origin
+    px,py = point
+    qx = ox + math.cos(angle) * (px-ox) - math.sin(angle) * (py-oy)
+    qy = oy + math.cos(angle) * (px-ox) + math.sin(angle) * (py-oy)
+    return qx,qy

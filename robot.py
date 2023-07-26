@@ -26,3 +26,4 @@ def forwards():
 # camera=initialize()
 # img = takePhoto(camera)
 # print(img)
+# print(type(img))

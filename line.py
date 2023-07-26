@@ -12,15 +12,18 @@ def update(image):
     reverse = cv2.bitwise_not(clear)
     ret,boolimg = cv2.threshold(reverse, 120, 255, cv2.THRESH_BINARY_INV)
     cx,cy,maxcontour,countours = tools.get_centroid_and_max_contour(boolimg, 1, cv2.CHAIN_APPROX_NONE)
-    print(cx)
+    print(cx,cy)
     if False not in (cx, cy):
         halfx=settings.xres//2
         if cx <= halfx-settings.sensitivity:
             robot.turnLeft(settings.turnBy)
+            return "L"
         elif cx >= halfx+settings.sensitivity:
             robot.turnRight(settings.turnBy)
+            return "R"
         else:
             robot.forwards()
+            return "F"
 
 # while True:
 #     update(robot.takePhoto(camera))
