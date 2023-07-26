@@ -3,4 +3,4 @@
 xres = 50
 yres = 50
 sensitivity = 10
-turnBy = 5
+turnBy = 0.5

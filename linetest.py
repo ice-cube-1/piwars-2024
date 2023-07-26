@@ -3,6 +3,7 @@ from PIL import Image
 import numpy
 import pygame
 import tools
+import settings
 
 imageold = Image.open("toFollowv3.png")
 x,y = 0,425
@@ -22,14 +23,15 @@ while x < 1200:
     img = numpy.array([[j[:3] for j in i] for i in img])
     direction = line.update(img)
     if direction == "L":
-        rotate+=1
-        x,y = tools.rotateCoords((1366/2,768/2),(x,y),1)
+        rotate+=settings.turnBy
+        x,y = tools.rotateCoords((1366/2,768/2),(x,y),settings.turnBy)
     elif direction == "R":
-        rotate-=1
-        x,y = tools.rotateCoords((1366/2,768/2),(x,y),-1)
-    x+=2
+        rotate-=settings.turnBy
+        x,y = tools.rotateCoords((1366/2,768/2),(x,y),-settings.turnBy)
+    else:
+        x+=5
     last30.pop(0)
     last30.append(x)
     
-    pygame.draw.rect(window,(255,0,0),pygame.Rect(x-size//2,y-size//2,size,size))
+    pygame.draw.rect(window,(255,0,0),pygame.Rect(x,y,size,size))
     pygame.display.update()
