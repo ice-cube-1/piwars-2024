@@ -20,14 +20,12 @@ while x < 1200:
     direction = line.update(img)
     if direction == "L":
         rotate-=settings.turnBy
-        x,y = tools.rotateCoords((1366/2,768/2),(x,y),settings.turnBy)
+        x,y = tools.rotateCoords((1366/2,768/2),(x,y),settings.turnBy)            
     elif direction == "R":
         rotate+=settings.turnBy
         x,y = tools.rotateCoords((1366/2,768/2),(x,y),-settings.turnBy)
     else:
-        x+=5
-    print(rotate)
-
+        x+=2
     
     pygame.draw.rect(window,(255,0,0),pygame.Rect(x,y,size,size))
     pygame.display.update()

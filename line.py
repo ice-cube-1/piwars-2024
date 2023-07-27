@@ -24,6 +24,7 @@ def update(image):
         else:
             robot.forwards()
             return "F"
+    return "NL"
 
 # while True:
 #     update(robot.takePhoto(camera))
