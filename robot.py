@@ -15,13 +15,16 @@ def takePhoto(camera):
     return camera.capture_array()
 
 def turnRight(turnBy):
-    print("Turning right")
+    print("Turning right by", turnBy)
 
 def turnLeft(turnBy):
-    print("Turning left")
+    print("Turning left by", turnBy)
 
-def forwards():
-    print("Moving forwards")
+def forwards(moveby):
+    print("Moving forwards by", moveby)
+
+def turnWheels(side,distance):
+    print("moving",side,"wheels by", distance)
 
 # camera=initialize()
 # img = takePhoto(camera)

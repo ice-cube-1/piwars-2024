@@ -25,7 +25,7 @@ while x < 1200:
         rotate+=settings.turnBy
         x,y = tools.rotateCoords((1366/2,768/2),(x,y),-settings.turnBy)
     else:
-        x+=2
+        x+=settings.movebyLine
     
     pygame.draw.rect(window,(255,0,0),pygame.Rect(x,y,size,size))
     pygame.display.update()

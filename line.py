@@ -22,7 +22,7 @@ def update(image):
             robot.turnRight(settings.turnBy)
             return "R"
         else:
-            robot.forwards()
+            robot.forwards(settings.moveByLine)
             return "F"
     return "NL"
 
