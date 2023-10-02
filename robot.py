@@ -1,6 +1,7 @@
 from picamera2 import Picamera2
 import time
 import settings
+import gpiozero
 
 def initialize():
     cam=Picamera2()
@@ -14,17 +15,15 @@ def initialize():
 def takePhoto(camera):
     return camera.capture_array()
 
-def turnRight(turnBy):
-    print("Turning right by", turnBy)
+def turn(turnTo,stepperpos):
+    stepperpos=round((turnTo-stepperpos),2)
+    print("stepper motor turning",stepperpos)
+    return stepperpos
 
-def turnLeft(turnBy):
-    print("Turning left by", turnBy)
 
 def forwards(moveby):
-    print("Moving forwards by", moveby)
+    print("Main wheel by",-round(moveby),2)
 
-def turnWheels(side,distance):
-    print("moving",side,"wheels by", distance)
 
 # camera=initialize()
 # img = takePhoto(camera)
