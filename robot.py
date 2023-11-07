@@ -2,6 +2,8 @@ from picamera2 import Picamera2
 import time
 import settings
 import gpiozero
+import steppertest
+from time import sleep
 
 def initialize():
     cam=Picamera2()
@@ -15,14 +17,13 @@ def initialize():
 def takePhoto(camera):
     return camera.capture_array()
 
-def turn(turnTo,stepperpos):
-    stepperpos=round((turnTo-stepperpos),2)
-    print("stepper motor turning",stepperpos)
-    return stepperpos
+def turn(turnTo,oldturnto):
+    if abs(turnTo-oldturnto) > 0.01:
+        steppertest.SetAngle(turnTo)
 
 
 def forwards(moveby):
-    print("Main wheel by",-round(moveby),2)
+    return
 
 
 # camera=initialize()

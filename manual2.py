@@ -2,20 +2,22 @@ import controller
 remote=controller.initialize()
 import robot
 speed = 1
-stepperpos=0
+from time import sleep
+steering,steeringnew = 7.5,7.5
 
 def update():
-    global speed,stepperpos
+    global speed,steering,steeringnew
     changespeed = controller.get("HAT",remote)[1]
     print(speed)
     if changespeed == 1:
         speed = 1
     elif changespeed == -1:
         speed = 0.5
-    steering = controller.get("LX",remote)
+    steeringnew = controller.get("LX",remote)
     speed = controller.get("LY",remote)
-    stepperpos = robot.turn(steering,stepperpos)
+    robot.turn(steeringnew, steering)
     robot.forwards(speed)
+    steering = steeringnew
     
 
 
