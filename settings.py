@@ -1,7 +1,2 @@
-# xres = 640
-# yres = 480
-xres = 32
-yres = 32
-sensitivity = 4
-turnBy = 1
-moveByLine = 5
+forward = 24
+backward = 23
