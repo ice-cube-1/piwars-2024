@@ -6,9 +6,8 @@ def initialise():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(settings.forward, GPIO.OUT)
     GPIO.setup(settings.backward, GPIO.OUT)
-    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(32, GPIO.OUT)
-    pwm=GPIO.PWM(32, 50)
+    pwm=GPIO.PWM(settings.pwmpin, 50)
     pwm.start(0)
 
 def turn(turnTo,oldturnto):
