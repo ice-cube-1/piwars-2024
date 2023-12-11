@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import settings
+from random import randint #only for placeholder
 
 def initialise():
     GPIO.setmode(GPIO.BCM)
@@ -31,3 +32,8 @@ def forward(direction):
     else:
         GPIO.output(settings.forward, False)
         GPIO.output(settings.backward, False)
+
+def getToFReadings():
+    # PLACEHOLDER
+    return {"BL": randint(1,10), "BR": randint(1,10),
+            "FL": randint(1,10), "FR": randint(1,10)}
