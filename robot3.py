@@ -16,13 +16,16 @@ class Robot:
         self.right = (math.sin(math.radians(self.theta+90)),math.cos(math.radians(self.theta+90)))
         self.front = geomtools.moveDirection(self.back,self.forwards,self.length)
     def getToFReadings(self,surface):
-        readings = {}
+        self.sensor = {}
         pygame.draw.line(surface, (255,0,0), self.back, self.front, width=3)
-        readings["BL"] = world.findRayHit(self.world, self.back,self.left)
-        pygame.draw.line(surface, (0,0,255), self.back, geomtools.moveDirection(self.back,self.left,readings["BL"]), width=3)
-        readings["BR"] = world.findRayHit(self.world, self.back,self.right)
-        pygame.draw.line(surface, (0,0,255), self.back, geomtools.moveDirection(self.back,self.right,readings["BR"]), width=3)
-        readings["FL"] = world.findRayHit(self.world, self.front,self.left)
-        pygame.draw.line(surface, (0,0,255), self.front, geomtools.moveDirection(self.front,self.left,readings["FL"]), width=3)
-        readings["FR"] = world.findRayHit(self.world, self.front,self.right)
-        pygame.draw.line(surface, (0,0,255), self.front, geomtools.moveDirection(self.front,self.right,readings["FR"]), width=3)
+        self.sensor["BL"] = world.findRayHit(self.world, self.back,self.left)
+        pygame.draw.line(surface, (0,0,255), self.back, geomtools.moveDirection(self.back,self.left,self.sensor["BL"]), width=3)
+        self.sensor["BR"] = world.findRayHit(self.world, self.back,self.right)
+        pygame.draw.line(surface, (0,0,255), self.back, geomtools.moveDirection(self.back,self.right,self.sensor["BR"]), width=3)
+        self.sensor["FL"] = world.findRayHit(self.world, self.front,self.left)
+        pygame.draw.line(surface, (0,0,255), self.front, geomtools.moveDirection(self.front,self.left,self.sensor["FL"]), width=3)
+        self.sensor["FR"] = world.findRayHit(self.world, self.front,self.right)
+        pygame.draw.line(surface, (0,0,255), self.front, geomtools.moveDirection(self.front,self.right,self.sensor["FR"]), width=3)
+    def moveForwards(self,distance):
+        self.back = geomtools.moveDirection(self.back,self.forwards,distance)
+        self.computeDirections()
