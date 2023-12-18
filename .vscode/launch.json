@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "wallfollow.py",
+            "program": "mazefollowcode.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
