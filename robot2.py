@@ -2,31 +2,32 @@ import RPi.GPIO as GPIO
 from time import sleep
 import settings
 from random import randint #only for placeholder
+duty = 7.5
 
 def initialise():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(settings.forward, GPIO.OUT)
     GPIO.setup(settings.backward, GPIO.OUT)
-    GPIO.setup(32, GPIO.OUT)
-    pwm=GPIO.PWM(settings.pwmpin, 50)
+    GPIO.setup(settings.pwm, GPIO.OUT)
+    pwm=GPIO.PWM(settings.pwm, 50)
     pwm.start(0)
+    return pwm
 
-def turn(turnTo,oldturnto):
-    global pwm
+def turn(turnTo,oldturnto,pwm):
     if abs(turnTo-oldturnto) > 0.01:
-        duty = duty*2.5+7.5
+        duty = turnTo*(-2.5)+7.5
         print(duty)
-        GPIO.output(32, True)
+        GPIO.output(settings.pwm, True)
         pwm.ChangeDutyCycle(duty)
         sleep(0.03)
-        GPIO.output(32, False)
+        GPIO.output(settings.pwm, False)
         pwm.ChangeDutyCycle(duty)
 
-def forward(direction):
-    if direction<0:
+def forwards(direction):
+    if direction>0.01:
         GPIO.output(settings.forward, False)
         GPIO.output(settings.backward, True)
-    elif direction>0:
+    elif direction<-0.01:
         GPIO.output(settings.forward, True)
         GPIO.output(settings.backward, False)
     else:
