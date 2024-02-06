@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import settings
-from random import randint #only for placeholder
+import toftest
 duty = 7.5
 
 def initialise():
@@ -11,7 +11,8 @@ def initialise():
     GPIO.setup(settings.pwm, GPIO.OUT)
     pwm=GPIO.PWM(settings.pwm, 50)
     pwm.start(0)
-    return pwm
+    sensors = toftest.setup()
+    return pwm,sensors
 
 def turn(turnTo,oldturnto,pwm):
     if abs(turnTo-oldturnto) > 0.01:
@@ -34,7 +35,5 @@ def forwards(direction):
         GPIO.output(settings.forward, False)
         GPIO.output(settings.backward, False)
 
-def getToFReadings():
-    # PLACEHOLDER
-    return {"BL": randint(1,10), "BR": randint(1,10),
-            "FL": randint(1,10), "FR": randint(1,10)}
+def getToFReadings(sensors):
+    return toftest.getToFReadings(sensors)
