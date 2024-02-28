@@ -17,7 +17,7 @@ def initialise():
 
 def turn(turnTo,oldturnto,pwm):
     if abs(turnTo-oldturnto) > 0.01:
-        duty = turnTo*(-2.5)+7.5
+        duty = (-turnTo)*(-2.5)+7.5
         GPIO.output(settings.pwm, True)
         pwm.ChangeDutyCycle(duty)
         sleep(0.03)
