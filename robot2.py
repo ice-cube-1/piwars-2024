@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import settings
-import toftest
+import lunafuncs
 duty = 7.5
 
 def initialise():
@@ -11,12 +11,11 @@ def initialise():
     GPIO.setup(settings.pwm, GPIO.OUT)
     pwm=GPIO.PWM(settings.pwm, 50)
     pwm.start(0)
-    #sensors = toftest.setup()
-    #return pwm,sensors
-    return [pwm]
+    sensors = lunafuncs.setup()
+    return pwm,sensors
 
 def turn(turnTo,oldturnto,pwm):
-    if abs(turnTo-oldturnto) > 0.01:
+    if abs(turnTo-oldturnto) > 0.05:
         duty = (-turnTo)*(-2.5)+7.5
         GPIO.output(settings.pwm, True)
         pwm.ChangeDutyCycle(duty)
@@ -34,11 +33,10 @@ def forwards(direction):
     else:
         GPIO.output(settings.forward, False)
         GPIO.output(settings.backward, False)
-    print(direction)
+    # print(direction)
 
 def getToFReadings(sensors):
-    return toftest.getToFReadings(sensors)
+    return lunafuncs.getReadings(sensors)
 
 
 initialise()
-forwards(1)

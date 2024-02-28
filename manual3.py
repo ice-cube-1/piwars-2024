@@ -2,8 +2,7 @@ import controller
 import robot2
 speed = 0
 steering,steeringnew = 7.5,7.5
-pwm = robot2.initialise()[0]
-def update(remote):
+def update(remote,pwm):
     global speed,steering,steeringnew
     steeringnew = controller.get("LX",remote)
     speed = controller.get("LY",remote)
@@ -11,11 +10,11 @@ def update(remote):
     robot2.forwards(speed)
     steering = steeringnew
 
-def run(remote):    
+def run(remote,pwm,sensors):    
     while True:
         if controller.get('B',remote) == 1:
             robot2.forwards(0)
             return
-        update(remote)
+        update(remote,pwm)
 
 #run()
