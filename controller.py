@@ -1,15 +1,15 @@
 import pygame
+import time
 
 def initialize():
     pygame.init()
     pygame.joystick.init()
-    if pygame.joystick.get_count() > 0:
-        controller = pygame.joystick.Joystick(0)
-        controller.init()
-        print("Controller connected:",controller.get_name())
-        return controller
-    else:
-        print("Initialization failed")
+    while pygame.joystick.get_count == 0:
+        time.sleep(500)
+    controller = pygame.joystick.Joystick(0)
+    controller.init()
+    print("Controller connected:",controller.get_name())
+    return controller
 
 
 
