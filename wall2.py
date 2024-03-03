@@ -7,20 +7,55 @@ import time
 #FL - 2
 #FR - 3
 name2idx={'BL':0, 'BR':1,'FL':2,'FR':3}
-t=10
+t=5
+mindistance=20
+left=-0.75
+right=0.75
 
 def update(pwm,sensors):
     readings = robot2.getToFReadings(sensors)
     print('readings',readings)
-    if readings[name2idx['BL']]+t<readings[name2idx["FL"]] or readings[name2idx['FR']]+t<readings[name2idx["BR"]]:
-        print('-0.5')
-        robot2.turn(-1,0,pwm)
-    elif readings[name2idx['FL']]+t<readings[name2idx["BL"]] or readings[name2idx['BR']]+t<readings[name2idx["FR"]]:
-        print('0.5')
-        robot2.turn(1,0,pwm)
+    bl=readings[name2idx['BL']]
+    if bl == 0:
+        bl=1000
+    br=readings[name2idx['BR']]
+    if br==0:
+        br=1000
+    fl=readings[name2idx['FL']]
+    if fl==0:
+        fl=1000
+    fr=readings[name2idx['FR']]
+    if fr==0:
+        fr=1000
+    if fl<fr:
+        if fl<mindistance:
+            robot2.turn(right,0,pwm)
+        else:
+            if fl+t<bl:
+                robot2.turn(right,0,pwm)
+            elif bl+t<fl:
+                robot2.turn(left,0,pwm)
+            else:
+                robot2.turn(0,100,pwm)
     else:
-        print('-0')
-        robot2.turn(0,1,pwm)
+        if fr<mindistance:
+            robot2.turn(left,0,pwm)
+        else:
+            if fr+t<br:
+                robot2.turn(left,0,pwm)
+            elif br+t<fr:
+                robot2.turn(right,0,pwm)
+            else:
+                robot2.turn(0,100,pwm)
+    #if readings[name2idx['BL']]+t<readings[name2idx["FL"]] or readings[name2idx['FR']]+t<readings[name2idx["BR"]]:
+        #print('-0.5')
+        #robot2.turn(-1,0,pwm)
+    #elif readings[name2idx['FL']]+t<readings[name2idx["BL"]] or readings[name2idx['BR']]+t<readings[name2idx["FR"]]:
+        #print('0.5')
+        #robot2.turn(1,0,pwm)
+    #else:
+        #print('-0')
+        #robot2.turn(0,1,pwm)
 
     # if readings[name2idx["FR"]] > readings[name2idx["BR"]]+t or readings[name2idx["FL"]]+t < readings[name2idx["BL"]]:
     #     robot2.turn(-0.5,0,pwm)

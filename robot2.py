@@ -15,6 +15,7 @@ def initialise():
     return pwm,sensors
 
 def turn(turnTo,oldturnto,pwm):
+    print(turnTo)
     if abs(turnTo-oldturnto) > 0.05:
         duty = (-turnTo)*(-2.5)+7.5
         GPIO.output(settings.pwm, True)
